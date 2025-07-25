@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Pesquisa de Satisfação - Secretaria de Saúde</title>
+</head>
+<body>
+    <div class="container">
+        <!-- Header com logo inspirado no banner -->
+        <div class="header">
+            <div class="logo-container">
+			  <img src="https://i.postimg.cc/GtSSp3MC/1-fw.png" alt="Logo">
+            </div>
+            <h1>Pesquisa de Satisfação</h1>
+            <p class="subtitle">SECRETARIA DE SAÚDE DE COSMÓPOLIS-SP</p>
+            <p class="description">Sua opinião é muito importante para melhorarmos nossos serviços!</p>
+        </div>
+
+        <!-- Formulário -->
+        <div class="form-card">
+            <form method="POST">
+                <div class="form-group">
+                    <label for="setor">Seu atendimento foi através de qual setor? *</label>
+                    <select name="setor" id="setor" required>
+                        <option value="">Selecione o setor...</option>
+                        <option value="endoscopia">Endoscopia</option>
+                        <option value="ginecologia">Ginecologia</option>
+                        <option value="maternidade">Maternidade</option>
+                        <option value="cardiologia">Cardiologia</option>
+                        <option value="ortopedia">Ortopedia</option>
+                        <option value="pediatria">Pediatria</option>
+                        <option value="urologia">Urologia</option>
+                        <option value="neurologia">Neurologia</option>
+                        <option value="oncologia">Oncologia</option>
+                        <option value="psiquiatria">Psiquiatria</option>
+                        <option value="pronto_atendimento_sus">Pronto atendimento (SUS)</option>
+                        <option value="pronto_atendimento_conv">Pronto atendimento (Convênio)</option>
+                        <option value="cirurgica">Cirúrgica</option>
+                        <option value="internacao">Internação</option>
+                        <option value="imagem">Imagem (exame)</option>
+                        <option value="hemodinamica">Hemodinâmica</option>
+                        <option value="laboratorio">Laboratório</option>
+                        <option value="fisioterapia">Fisioterapia</option>
+                        <option value="uti">UTI</option>
+                        <option value="farmacia">Farmácia</option>
+                        <option value="outro">Outro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Avalie os serviços prestados: *</label>
+                    <div class="rating-container">
+                        <div class="rating-option">
+                            <input type="radio" name="avaliacao" value="otimo" id="otimo" required>
+                            <label for="otimo" class="rating-label">
+                                <span class="rating-emoji">😊</span>
+                                <span class="rating-text">Ótimo</span>
+                            </label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="avaliacao" value="bom" id="bom" required>
+                            <label for="bom" class="rating-label">
+                                <span class="rating-emoji">🙂</span>
+                                <span class="rating-text">Bom</span>
+                            </label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="avaliacao" value="regular" id="regular" required>
+                            <label for="regular" class="rating-label">
+                                <span class="rating-emoji">😐</span>
+                                <span class="rating-text">Regular</span>
+                            </label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="avaliacao" value="ruim" id="ruim" required>
+                            <label for="ruim" class="rating-label">
+                                <span class="rating-emoji">😞</span>
+                                <span class="rating-text">Ruim</span>
+                            </label>
+                        </div>
+                        <div class="rating-option">
+                            <input type="radio" name="avaliacao" value="pessimo" id="pessimo" required>
+                            <label for="pessimo" class="rating-label">
+                                <span class="rating-emoji">😠</span>
+                                <span class="rating-text">Péssimo</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="identificacao">Sua identificação: *</label>
+                    <select name="identificacao" id="identificacao" required>
+                        <option value="">Selecione sua identificação...</option>
+                        <option value="paciente">Paciente</option>
+                        <option value="acompanhante">Acompanhante</option>
+                        <option value="visitante">Visitante</option>
+                        <option value="outro">Outro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="nome">Nome (Opcional)</label>
+                    <input type="text" name="nome" id="nome" placeholder="Digite seu nome">
+                </div>
+
+                <div class="form-group">
+                    <label for="contato">Contato - Telefone com DDD (Opcional)</label>
+                    <input type="tel" name="contato" id="contato" placeholder="(00) 00000-0000">
+                </div>
+
+                <div class="form-group">
+                    <label for="opiniao">Deixe aqui sua opinião</label>
+                    <textarea name="opiniao" id="opiniao" placeholder="Compartilhe sua experiência conosco..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <svg style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                    </svg>
+                    Enviar Pesquisa
+                </button>
+            </form>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+           <p>© 2025 Secretaria de Saúde de Cosmópolis-SP - Todos os direitos reservados</p>
+        </div>
+    </div>
+
+    <!-- Script para máscara de telefone -->
+    <script>
+        document.getElementById('contato').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 0) {
+                value = value.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
+            }
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>
