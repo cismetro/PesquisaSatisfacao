@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Dashboard Administrativo - Secretaria de Saúde</title>
+    <style>
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #2E86AB;
+        }
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+        .filters-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            align-items: end;
+        }
+        .table-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .table-header {
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .data-table th,
+        .data-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        .data-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+        .data-table tr:hover {
+            background-color: #f8f9fa;
+        }
+        .badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+        .badge-otimo { background: #d4edda; color: #155724; }
+        .badge-bom { background: #d1ecf1; color: #0c5460; }
+        .badge-regular { background: #fff3cd; color: #856404; }
+        .badge-ruim { background: #f8d7da; color: #721c24; }
+        .badge-pessimo { background: #f5c6cb; color: #721c24; }
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .logout-btn {
+            background: #dc3545;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .logout-btn:hover {
+            background: #c82333;
+        }
+        .overflow-scroll {
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="admin-header">
+            <h1 style="color: #333; margin: 0;">Dashboard Administrativo</h1>
+            <a href="{{ url_for('admin_logout') }}" class="logout-btn">Sair</a>
+        </div>
+
+        <!-- Estatísticas -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">{{ estatisticas.total_respostas }}</div>
+                <div class="stat-label">Total de Respostas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">{{ estatisticas.avaliacao_media }}</div>
+                <div class="stat-label">Avaliação Média</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" style="font-size: 1.2em;">{{ estatisticas.setor_mais_avaliado }}</div>
+                <div class="stat-label">Setor Mais Avaliado</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" style="font-size: 1em;">{{ estatisticas.ultima_resposta }}</div>
+                <div class="stat-label">Última Resposta</div>
+            </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="filters-section">
+            <h3>Filtros</h3>
+            <form method="GET">
+                <div class="filters-grid">
+                    <div class="form-group">
+                        <label for="setor">Setor</label>
+                        <select name="setor" id="setor">
+                            <option value="">Todos os setores</option>
+                            {% for setor in setores_unicos %}
+                                <option value="{{ setor.setor }}" {% if setor_filtro == setor.setor %}selected{% endif %}>
+                                    {{ setor.setor.replace('_', ' ') }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="avaliacao">Avaliação</label>
+                        <select name="avaliacao" id="avaliacao">
+                            <option value="">Todas as avaliações</option>
+                            <option value="otimo" {% if avaliacao_filtro == 'otimo' %}selected{% endif %}>Ótimo</option>
+                            <option value="bom" {% if avaliacao_filtro == 'bom' %}selected{% endif %}>Bom</option>
+                            <option value="regular" {% if avaliacao_filtro == 'regular' %}selected{% endif %}>Regular</option>
+                            <option value="ruim" {% if avaliacao_filtro == 'ruim' %}selected{% endif %}>Ruim</option>
+                            <option value="pessimo" {% if avaliacao_filtro == 'pessimo' %}selected{% endif %}>Péssimo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="submit-btn">Aplicar Filtros</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Tabela de Respostas -->
+        <div class="table-container">
+            <div class="table-header">
+                <h3 style="margin: 0;">Respostas da Pesquisa ({{ respostas|length }} resultados)</h3>
+            </div>
+            <div class="overflow-scroll">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Setor</th>
+                            <th>Avaliação</th>
+                            <th>Identificação</th>
+                            <th>Nome</th>
+                            <th>Contato</th>
+                            <th>Opinião</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if respostas %}
+                            {% for resposta in respostas %}
+                                <tr>
+                                    <td>{{ resposta.id }}</td>
+                                    <td>{{ resposta.setor.replace('_', ' ') }}</td>
+                                    <td>
+                                        <span class="badge badge-{{ resposta.avaliacao }}">
+                                            {% if resposta.avaliacao == 'otimo' %}Ótimo
+                                            {% elif resposta.avaliacao == 'bom' %}Bom
+                                            {% elif resposta.avaliacao == 'regular' %}Regular
+                                            {% elif resposta.avaliacao == 'ruim' %}Ruim
+                                            {% elif resposta.avaliacao == 'pessimo' %}Péssimo
+                                            {% endif %}
+                                        </span>
+                                    </td>
+                                    <td>{{ resposta.identificacao|title }}</td>
+                                    <td>{{ resposta.nome or '-' }}</td>
+                                    <td>{{ resposta.contato or '-' }}</td>
+                                    <td style="max-width: 300px; overflow: hidden; text-overflow: ellipsis;">
+                                        {{ resposta.opiniao or '-' }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="7" style="text-align: center; color: #666; padding: 40px;">
+                                    Nenhuma resposta encontrada
+                                </td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="{{ url_for('formulario') }}" style="color: #666; text-decoration: none;">
+                ← Voltar ao formulário
+            </a>
+        </div>
+    </div>
+</body>
+</html>

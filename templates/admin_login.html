@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Login Administrativo - Secretaria de Saúde</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <img src="https://i.postimg.cc/GtSSp3MC/1-fw.png" alt="Logo">
+            </div>
+            <h1>Acesso Administrativo</h1>
+            <p class="subtitle">SECRETARIA DE SAÚDE DE COSMÓPOLIS-SP</p>
+        </div>
+
+        <div class="form-card">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST">
+                <div class="form-group">
+                    <label for="password">Senha do Administrador *</label>
+                    <input type="password" name="password" id="password" required>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <svg style="width: 20px; height: 20px; margin-right: 8px; vertical-align: middle;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    Entrar
+                </button>
+            </form>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="{{ url_for('formulario') }}" style="color: #666; text-decoration: none;">
+                    ← Voltar ao formulário
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

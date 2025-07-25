@@ -8,7 +8,13 @@
 </head>
 <body>
     <div class="container">
-        <!-- Header com logo inspirado no banner -->
+	<!-- Link Admin -->
+        <div style="text-align: center; margin-bottom: 20px;">
+            <a href="{{ url_for('admin_login') }}" style="color: #666; text-decoration: none; font-size: 14px;">
+                Acesso Administrativo
+            </a>
+        </div>      
+	  <!-- Header com logo inspirado no banner -->
         <div class="header">
             <div class="logo-container">
 			  <img src="https://i.postimg.cc/GtSSp3MC/1-fw.png" alt="Logo">
@@ -25,27 +31,32 @@
                     <label for="setor">Seu atendimento foi através de qual setor? *</label>
                     <select name="setor" id="setor" required>
                         <option value="">Selecione o setor...</option>
-                        <option value="endoscopia">Endoscopia</option>
-                        <option value="ginecologia">Ginecologia</option>
-                        <option value="maternidade">Maternidade</option>
-                        <option value="cardiologia">Cardiologia</option>
-                        <option value="ortopedia">Ortopedia</option>
-                        <option value="pediatria">Pediatria</option>
-                        <option value="urologia">Urologia</option>
-                        <option value="neurologia">Neurologia</option>
-                        <option value="oncologia">Oncologia</option>
-                        <option value="psiquiatria">Psiquiatria</option>
-                        <option value="pronto_atendimento_sus">Pronto atendimento (SUS)</option>
-                        <option value="pronto_atendimento_conv">Pronto atendimento (Convênio)</option>
-                        <option value="cirurgica">Cirúrgica</option>
-                        <option value="internacao">Internação</option>
-                        <option value="imagem">Imagem (exame)</option>
-                        <option value="hemodinamica">Hemodinâmica</option>
-                        <option value="laboratorio">Laboratório</option>
-                        <option value="fisioterapia">Fisioterapia</option>
-                        <option value="uti">UTI</option>
-                        <option value="farmacia">Farmácia</option>
-                        <option value="outro">Outro</option>
+                                    <option value="UBS_CSII_-_Centro">UBS CSII - Centro</option>
+                                    <option value="UBS_Jardim_de_Faveri">UBS Jardim de Fáveri</option>
+                                    <option value="UBS_PSF_Andorinhas">UBS / PSF Andorinhas</option>
+                                    <option value="UBS_PSF_Beto_Spana">UBS / PSF Beto Spana</option>
+                                    <option value="PSF_Cosmopolis_1">PSF Cosmópolis 1</option>
+                                    <option value="PSF_Vila_Cosmos">PSF Vila Cosmos</option>
+                                    <option value="PSF_Henrique_Scursoni_Neto">PSF Henrique Scursoni Neto</option>
+                                    <option value="PSF_Sidney_Alves_Aranha_TIDE">PSF Sidney Alves Aranha TIDE</option>
+                                    <option value="UBS_Nosso_Teto">UBS Nosso Teto</option>
+                                    <option value="AME_Atendimento_Medico_Especializado">AME Atendimento Médico Especializado</option>
+                                    <option value="CERC_Centro_de_Reabilitacao">CERC (Centro de Reabilitação)</option>
+                                    <option value="CEO_Centro_de_Especialidades_Odontologicas">CEO (Centro de Especialidades Odontológicas)</option>
+                                    <option value="CAPS_Adulto">CAPS Adulto</option>
+                                    <option value="CAPS_i_CAPS_Infantil">CAPS i (CAPS Infantil)</option>
+                                    <option value="Vigilancia_Epidemiologica_VE">Vigilância Epidemiológica (VE)</option>
+                                    <option value="Centro_de_Testagem_e_Aconselhamento_CTA">Centro de Testagem e Aconselhamento (CTA)</option>
+                                    <option value="NUESA_Nucleo_de_Educacao_em_Saude">NUESA (Núcleo de Educação em Saúde)</option>
+                                    <option value="Farmacia_Municipal">Farmácia Municipal</option>
+                                    <option value="SAD_Sistema_de_Atendimento_Domiciliar">SAD (Sistema de Atendimento Domiciliar)</option>
+                                    <option value="Secretaria_de_Saude">Secretaria de Saúde</option>
+                                    <option value="Central_de_Regulacao_e_Agendamento">Central de Regulação e Agendamento</option>
+                                    <option value="Central_de_gerenciamento_CROSS_Servico_Social">Central de gerenciamento CROSS / Serviço Social</option>
+                                    <option value="Central_de_Transportes_e_Ambulancias">Central de Transportes e Ambulâncias</option>
+                                    <option value="Almoxarifado">Almoxarifado</option>
+                                    <option value="Vigilancia_Sanitaria_VISA">Vigilância Sanitária (VISA)</option>
+                                    <option value="Zoonoses">Zoonoses</option>
                     </select>
                 </div>
 
