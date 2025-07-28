@@ -8,7 +8,9 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: #333;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /*background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);*/
+	background-color: #ebf9f9;
+
     min-height: 100vh;
 }
 
@@ -17,7 +19,7 @@ body {
     margin: 0 auto;
     padding: 20px;
 }
-
+/*
 .header {
     text-align: center;
     margin-bottom: 40px;
@@ -26,6 +28,67 @@ body {
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
+*/
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 60px 20px;
+    background-image: url('https://i.postimg.cc/GtSSp3MC/1-fw.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center; /* Centraliza horizontal e verticalmente */
+    background-color: rgba(255, 255, 255, 0.3);
+    background-blend-mode: overlay;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centraliza o conteúdo verticalmente */
+    align-items: center; /* Centraliza o conteúdo horizontalmente */
+}
+
+/* Alternativa com logo mais transparente 
+.header-alt {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 60px 20px;
+    background-image: url('https://i.postimg.cc/GtSSp3MC/1-fw.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    min-height: 200px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+*/
+.header-alt::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    z-index: 1;
+}
+
+.header-alt h1,
+.header-alt p {
+    position: relative;
+    z-index: 2;
+}
+
+/* Remover a logo-container se estiver usando */
+.logo-container {
+    display: none;
+}
+
+
+
 
 .logo-container {
     margin-bottom: 20px;
