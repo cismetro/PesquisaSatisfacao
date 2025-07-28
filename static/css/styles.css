@@ -19,21 +19,13 @@ body {
     margin: 0 auto;
     padding: 20px;
 }
-/*
-.header {
-    text-align: center;
-    margin-bottom: 40px;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-*/
+
 .header {
     text-align: center;
     margin-bottom: 40px;
     padding: 60px 20px;
-    background-image: url('https://i.postimg.cc/GtSSp3MC/1-fw.png');
+    /*background-image: url('https://i.postimg.cc/GtSSp3MC/1-fw.png');*/
+	background-image: url('https://i.postimg.cc/brwqCRhP/Prt-Scr-capture.jpg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center center; /* Centraliza horizontal e verticalmente */
@@ -48,22 +40,6 @@ body {
     justify-content: center; /* Centraliza o conteúdo verticalmente */
     align-items: center; /* Centraliza o conteúdo horizontalmente */
 }
-
-/* Alternativa com logo mais transparente 
-.header-alt {
-    text-align: center;
-    margin-bottom: 40px;
-    padding: 60px 20px;
-    background-image: url('https://i.postimg.cc/GtSSp3MC/1-fw.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    position: relative;
-    min-height: 200px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-*/
 .header-alt::before {
     content: '';
     position: absolute;
@@ -267,6 +243,11 @@ body {
     background-color: #d4edda;
     border-color: #c3e6cb;
 }
+.admin{
+	    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+
 
 /* Responsividade */
 @media (max-width: 768px) {

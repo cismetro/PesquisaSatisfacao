@@ -2,12 +2,24 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 import sqlite3
 from datetime import datetime
 import os
+from dotenv import load_dotenv
+
+# Carregar variáveis de ambiente do arquivo .env
+load_dotenv()
 
 app = Flask(__name__)
 
-# Configurações - usar variáveis de ambiente do sistema ou valores padrão
-ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', 'dG4rTALaq8')
-SECRET_KEY = os.environ.get('SECRET_KEY', 'sua_chave_secreta_aqui_mude_para_producao')
+# Configurações - carregar do .env
+ADMIN_PASSWORD = os.getenv('ADMIN_PASSWORD')
+SECRET_KEY = os.getenv('SECRET_KEY')
+
+# Verificar se as variáveis foram definidas
+if not ADMIN_PASSWORD:
+    raise ValueError("❌ ADMIN_PASSWORD não foi definida no arquivo .env")
+if not SECRET_KEY:
+    raise ValueError("❌ SECRET_KEY não foi definida no arquivo .env")
+
+print("✅ Configurações carregadas do arquivo .env")
 
 app.secret_key = SECRET_KEY
 
